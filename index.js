@@ -3,25 +3,31 @@ const app = express();
 const path = require("path");
 
 const members = [
-    {
-        id: 1,
-        name: 'Randy',
-        email: "randy@ironhack.com",
-        status: "active" 
-    },
-    {
-        id: 1,
-        name: 'Sebastian',
-        email: "sebastian@gmail.com",
-        status: "inactive" 
-    }
+  {
+    id: 1,
+    name: "Randy",
+    email: "randy@ironhack.com",
+    status: "active"
+  },
+  {
+    id: 2,
+    name: "Sebastian",
+    email: "sebastian@gmail.com",
+    status: "inactive"
+  }
 ];
 
 // ROUTES
 
-app.get('/api/members', (req, res) => {
-    res.json(members);
-})
+// ALL MEMBERS
+app.get("/api/members", (req, res) => {
+  res.json(members);
+});
+
+// SINGLE MEMBER
+app.get("/api/members/:id", (req, res) => {
+  res.json(members.filter(member => member.id === parseInt(req.params.id)));
+});
 
 // STATIC FOLDER
 app.use(express.static(path.join(__dirname, "public")));
